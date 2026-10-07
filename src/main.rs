@@ -17,6 +17,7 @@ mod perturb;
 mod xspecies;
 mod kin;
 mod refdep;
+mod auroc;
 
 type Res<T> = Result<T, Box<dyn Error>>;
 
@@ -174,6 +175,14 @@ enum Cmd {
         #[arg(long)]
         out: String,
     },
+    /// AUROC of positives (edited / erroneous arrays) against held-out validated negatives, per group
+    Auroc {
+        /// TSV with header: set group chrom score (set = pos | neg)
+        #[arg(long)]
+        input: String,
+        #[arg(long)]
+        out: String,
+    },
     /// Reference dependence: pool component histograms into consensus recipes and score query assemblies
     Refdep {
         /// TAG=HIST_PREFIX[@REGION_TO_CHROM_MAP], repeatable
@@ -240,6 +249,7 @@ fn main() {
             perturb::run(&perturb::Args { sources, units, donors, donor_meta, sf, doses, placements, seed, out })
         }
         Cmd::Nn { dist, ids, meta, out } => run_nn(&dist, &ids, &meta, &out),
+        Cmd::Auroc { input, out } => auroc::run(&input, &out),
         Cmd::Refdep { components, recipes, queries, eps, out } => refdep::run(&refdep::RefdepArgs { components, recipes, queries, eps, out }),
         Cmd::Kin { dist, metric, ids, meta, trios, labels, exclude, label, out } => {
             kin::run(&kin::KinArgs { dist, metric, ids, meta, trios, labels, exclude, label, out })

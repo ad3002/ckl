@@ -27,6 +27,7 @@ Corda & Giunta 2025), so distances one alpha-satellite monomer apart peak at 171
 | `nn` | held-out nearest neighbour from any all-vs-all distance table (e.g. `mash dist`) |
 | `kin` | within-chromosome nearest neighbours: parent-as-nearest in trios (with chance level and the child's other haplotype), and group-label accuracy |
 | `refdep` | reference dependence: pool component histograms into consensus recipes and score assemblies against each, with the fraction of query mass in bins the reference lacks |
+| `auroc` | AUROC of edited or erroneous arrays against validated ones, chromosome-normalized, plus detection at one fixed threshold |
 | `perturb` | controlled edits of HOR arrays (collapse, duplication, reordering, inversion, joins, foreign insertion, indels, box destruction), rescanned and scored against the source |
 | `censat-regions`, `extract`, `meta-set`, `xident` | helpers for annotation-based regions, per-region FASTA for k-mer baselines, and cross-species identification |
 
